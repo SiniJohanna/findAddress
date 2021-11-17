@@ -15,15 +15,17 @@ export default function App() {
   );
   const [coordinate, setCoordinate] = useState(
     {
-      latitude:'',
-      longitude: ''
+      latitude:60.200692,
+      longitude: 24.934302
     }
   );
 
   const getCoordinates = address => {
-    fetch(`http://www.mapquestapi.com/geocoding/v1/address?key=KEY=${address}`)
+    console.log(address);
+    fetch(`http://www.mapquestapi.com/geocoding/v1/address?key=KZm8i8wxroMvRbCHHiSfnrJzWshuzTma&location=${address}`)
     .then(response=>  response.json())
     .then(responseJson=>{ 
+      console.log(address)
       setCoordinate(
         {
           latitude: responseJson.results[0].locations[0].displayLatLng.lat,
@@ -48,7 +50,7 @@ export default function App() {
       style={styles.map}
       region={region}
         >
-        <Marker coordinate={coordinate}/>
+        <Marker coordinate={region}/>
         </MapView>
         <View style={{flex: 1}}>
         <TextInput 
@@ -75,7 +77,7 @@ const styles = StyleSheet.create({
     borderWidth:1
   },
   map: {
-    flex:2,
+    flex:1,
     width: "100%",
     height: "100%"
   }
